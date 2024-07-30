@@ -1,7 +1,13 @@
 <div>
-  <button>
-    <img [src]="'assets/users/' + selectedUser.avatar" [alt]="selectedUser.name"/>
-    <span>{{selectedUser.name}}</span>
+  <button (click)="onSelectUser()">
+    <img [src]="imagePath()"
+    [alt]="selectedUser().name"/>
+    <span>{{selectedUser().name}}</span>
   </button>
 
 </div>
+
+<!--A signal() func outputs a signal
+And a computed() func outputs a computed-signal.
+Since bout outputs are signals, you must treat these objets as funcs in the HTML by trailing their names with a () ; see lines 2 to 5
+-->

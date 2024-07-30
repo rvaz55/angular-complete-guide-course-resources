@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-//Import the dummy-users.ts file
+import { Component, computed, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
-//Create function that picks a random number in index
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
 
 @Component({
@@ -13,7 +11,17 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-//Note: 'var' or 'const' were not needed to delcare the 'selectedUser' variable
-  selectedUser = DUMMY_USERS[randomIndex];
+  //The 'imagePath' will only be updated if an update is made to 'selectedUser' first
+  selectedUser = signal( DUMMY_USERS[randomIndex]);
+  imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar );
+
+
+  onSelectUser(){
+    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+    //The 'set' function can be used to change the value of a signal
+    this.selectedUser.set(DUMMY_USERS[randomIndex]);
+  }
 
 }
+
+
