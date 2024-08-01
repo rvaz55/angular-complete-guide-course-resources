@@ -1,13 +1,14 @@
 <div>
   <button (click)="onSelectUser()">
-    <img [src]="imagePath()"
-    [alt]="selectedUser().name"/>
-    <span>{{selectedUser().name}}</span>
+    <img [src]="imagePath" [alt]="name"/>
+    <span>{{name}}</span>
   </button>
 
 </div>
 
-<!--A signal() func outputs a signal
-And a computed() func outputs a computed-signal.
-Since bout outputs are signals, you must treat these objets as funcs in the HTML by trailing their names with a () ; see lines 2 to 5
+<!--Update this file's imagpePath to point to the public imagePath property set in the
+user.component.ts file and set the [alt] property to the name
+
+Note: The (click) event binding will retain
+the ()
 -->

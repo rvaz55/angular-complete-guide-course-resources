@@ -1,7 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
-
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
+//Import the Input decortator
+import { Component, input, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -11,15 +9,20 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  //The 'imagePath' will only be updated if an update is made to 'selectedUser' first
-  selectedUser = signal( DUMMY_USERS[randomIndex]);
-  imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar );
+  //Assign a 'type' to the avatar property
+  //Then get around the 'no initial value set' err msg by appending ! to end of property
+  //The exclamation tells Angular that this value will be set at a later time (run-time) outside the component's ts file
+  @Input() avatar!: string;
+  @Input() name!: string;
 
+  //Add in the getter for the imagePath
+  //Then udpate the user's html file
+  get imagePath(){
+    return 'assets/users/'+ this.avatar;
+  }
 
   onSelectUser(){
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    //The 'set' function can be used to change the value of a signal
-    this.selectedUser.set(DUMMY_USERS[randomIndex]);
+
   }
 
 }
